@@ -1,4 +1,4 @@
-var Kappa = require('./custom_weighted_kappa');
+var Cohen = require('.lib/cohens.kappa');
 var retrieve = require('./retrieve_tomatoes_reviews');
 var Q = require('q');
 
@@ -61,7 +61,7 @@ function compare(user, reviewerObject) {
   for (reviewer in reviewers) {
     if (reviewerObject.hasOwnProperty(reviewer)) {
       var reviews = reviewers[reviewer];
-      var k = Kappa.linear(user, reviews);
+      var k = Cohen.kappa(user, reviews, 5, 'linear');
       console.log(reviewer + " agreement:" + k);
     }
   };
