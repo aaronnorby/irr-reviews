@@ -43,7 +43,7 @@ var user = {
 
 // This chain adds Terminator reviews to the list and calculates kappas.  
 return retrieve.getSearchResult("The Terminator")
-.then(function(searchResult) {return retrieve.getReviewLink(searchResult)})
+.then(function(searchResult) { return retrieve.getReviewLink(searchResult)})
 .then(function(reviewLink) {return retrieve.reviewsFromReviewLink(reviewLink)})
 .then(function(reviewArray) {
     reviewers = retrieve.parseReviewArray("The Terminator", reviewArray, reviewers, true);

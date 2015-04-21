@@ -7,7 +7,7 @@ function RetrieveTomato() {
 };
 
 var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies.json" 
-var apikey = "my-api-key";
+var apikey = "my-API-key";
 
 /*
  * Not all reviewers have numeric ratings, some just have
