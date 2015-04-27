@@ -129,7 +129,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
   function normalizeScore(score) {
     try { 
       //Get the two halves of the score. This regex may not be perfect. 
-      var scoreParts = score.split("\/");
+      var scoreParts = score.split("/");
       var dividend = parseFloat(scoreParts[0], 10);
       var divisor = parseFloat(scoreParts[1], 10);
 
