@@ -1,12 +1,10 @@
-var Kappa = require('./custom_weighted_kappa');
+var Cohen = require('./lib/cohens_kappa');
 var retrieve = require('./retrieve_tomatoes_reviews');
 var Q = require('q');
 
-// Should return 0.25. Checked using R (kappa_script.R) 
 /*
 var user = {'Terminator': 5, 'Speed': 3, 'Aliens': 5, 'Point Break': 2, 'Red Dawn': 2, 'Blond on Blond': 1};
 var reviewer = {'Terminator': 4, 'Speed': 2, 'Aliens': 5, 'Point Break': 3, 'Red Dawn': 3, 'Blond on Blond': 4};
-console.log(Kappa.linear(user, reviewer), + "" + Kappa.squared(user, reviewer));
 */
 
 
@@ -55,13 +53,13 @@ return retrieve.getSearchResult("The Terminator")
 });
 
 
-// Calls Kappa and gets scores for all reviewers, prints them out. 
+// Calls CKJS and gets scores for all reviewers, prints them out. 
 function compare(user, reviewerObject) {
   var results = [];
   for (reviewer in reviewers) {
     if (reviewerObject.hasOwnProperty(reviewer)) {
       var reviews = reviewers[reviewer];
-      var k = Kappa.linear(user, reviews);
+      var k = Cohen.kappa(user, reviews, 5, 'linear');
       console.log(reviewer + " agreement:" + k);
     }
   };
