@@ -1,4 +1,4 @@
-var Cohen = require('.lib/cohens.kappa');
+var Cohen = require('./lib/cohens_kappa');
 var retrieve = require('./retrieve_tomatoes_reviews');
 var Q = require('q');
 
