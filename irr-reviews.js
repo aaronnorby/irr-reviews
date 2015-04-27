@@ -25,7 +25,7 @@ var reviewers = {'Peter Travers':
   'Dave Kehr':
   {'Point Break': 3,
    }
-  };
+};
 
 // Sample user ratings. Not me. 
 var user = {
@@ -34,7 +34,8 @@ var user = {
   'Aliens': 5, 
   'Point Break': 2, 
   'Red Dawn': 2, 
-  'Blond on Blond': 1};
+  'Blond on Blond': 1
+};
 
 
 
