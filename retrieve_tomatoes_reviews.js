@@ -129,23 +129,23 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
   function normalizeScore(score) {
     try { 
       //Get the two halves of the score. This regex may not be perfect. 
-      var re = /(\d+|\d+\.\d+)\/(\d+)/;
-      var scoreNum = score.match(re)[1]; 
-      var scoreDenom = score.match(re)[2];
-      scoreNum = parseInt(scoreNum, 10);
-      scoreDenom = parseInt(scoreDenom, 10);
+      var scoreParts = score.split("/");
+      var dividend = parseFloat(scoreParts[0], 10);
+      var divisor = parseFloat(scoreParts[1], 10);
 
-      if (scoreNum == 0) {
-        scoreNum += 1;
-        scoreDenom += 1;
+      // TODO: add check that neither is NaN after parseFloat();
+
+      if (dividend == 0) {
+        dividend += 1;
+        divisor += 1;
       }
 
-      if (scoreDenom == 5) {
+      if (divisor == 5) {
         return score;
 
-      } else if (scoreNum < 5) {
-        var breaks = 5 / scoreDenom; // Determine size of bins in 5-star units
-        var lowerBound = breaks * (scoreNum - 1); // Which bins the score could be in.
+      } else if (dividend < 5) {
+        var breaks = 5 / divisor; // Determine size of bins in 5-star units
+        var lowerBound = breaks * (dividend - 1); // Which bins the score could be in.
 
         // Assign to a 5-star bin randomly from the bins the score could be in.
         // Assumes, eg, a 2/2 could be anywhere in upper half of /5 scale. 
@@ -153,8 +153,8 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
         var newScore = Math.ceil((r*breaks) + lowerBound); 
         return newScore;
 
-      } else if (scoreNum > 5) {
-        var newScore = Math.ceil((5 / scoreDenom) * scoreNum);
+      } else if (dividend > 5) {
+        var newScore = Math.ceil((5 / divisor) * dividend);
         return newScore;
       }
 
