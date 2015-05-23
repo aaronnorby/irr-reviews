@@ -133,7 +133,9 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       var dividend = parseFloat(scoreParts[0], 10);
       var divisor = parseFloat(scoreParts[1], 10);
 
-      // TODO: add check that neither is NaN after parseFloat();
+      // TODO: add check that neither is NaN after parseFloat(); Also,
+      // normalizeScore is leaving some scores with "/" in them, which returns NaN
+      // with kappa.
 
       if (dividend == 0) {
         dividend += 1;
@@ -141,7 +143,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       }
 
       if (divisor == 5) {
-        return score;
+        return dividend;
 
       } else if (dividend < 5) {
         var breaks = 5 / divisor; // Determine size of bins in 5-star units
@@ -167,6 +169,8 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
 
 RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
   var deferred = Q.defer();
+
+  setTimeout(function() {
   var searchStr = encodeURI(searchTerm);
   var path = baseUrl + "?apikey=" + apikey + "&q=" + searchStr;
 
@@ -186,6 +190,8 @@ RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
       deferred.reject(new Error("Search Error: " + err));
     });
   });
+  }, 4000);
+  
 
   return deferred.promise;
 
