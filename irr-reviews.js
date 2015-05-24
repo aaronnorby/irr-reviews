@@ -72,7 +72,10 @@ var user = {
 
 var profReviews = {};
 
-// The following
+// The following creates a promise for each movie title in the user object and adds
+// it to the searches array, each of which will later be called sequentially. These
+// functions take in a search term (movie title) and add the professional reviews
+// for that movie to profReviews. 
 var titles = Object.keys(user);
 var searches = [];
 titles.forEach(function(title) {
@@ -103,14 +106,16 @@ var showResults = function() {
 searches.push(showResults);
 
 //Serialize the function calls for each movie in turn. This is necessary to avoid
-//exceeding Rotten Tom's request limit (5/s).
+//exceeding Rotten Tom's request limit (5/s). This forEach is what finally does the
+//work. 
 var result = Q(1);
 searches.forEach(function(f) {
   result = result.then(f);
 });
 
 
-// Returns array of reviews for single film.
+
+// Utility function that returns array of reviews for single film.
 function getReviews(searchTerm) {
   return retrieve.getSearchResult(searchTerm)
   .then(function(searchResult){ return retrieve.getReviewLink(searchResult)})
