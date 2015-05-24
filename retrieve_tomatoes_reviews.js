@@ -170,6 +170,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
 RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
   var deferred = Q.defer();
 
+  // setTimout to throttle calls to Rotten Tom's api, which has 5 requests/s cap.
   setTimeout(function() {
   var searchStr = encodeURI(searchTerm);
   var path = baseUrl + "?apikey=" + apikey + "&q=" + searchStr;
@@ -190,7 +191,7 @@ RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
       deferred.reject(new Error("Search Error: " + err));
     });
   });
-  }, 4000);
+  }, 500);
   
 
   return deferred.promise;
