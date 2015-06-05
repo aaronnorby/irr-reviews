@@ -72,7 +72,10 @@ var user = {
 
 var profReviews = {};
 
-// The following
+// The following creates a function for each title in the user's reviews, which
+// will get the reviews for that title. The functions are pushed onto the searches
+// stack, which will be called sequentially down below after showResults() has been
+// added to that stack as well. 
 var titles = Object.keys(user);
 var searches = [];
 titles.forEach(function(title) {
@@ -110,7 +113,7 @@ searches.forEach(function(f) {
 });
 
 
-// Returns array of reviews for single film.
+// Returns array of reviews for single film. Useful for testing. 
 function getReviews(searchTerm) {
   return retrieve.getSearchResult(searchTerm)
   .then(function(searchResult){ return retrieve.getReviewLink(searchResult)})
