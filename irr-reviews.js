@@ -114,12 +114,8 @@ searches.forEach(function(f) {
 });
 
 
-<<<<<<< HEAD
 
 // Utility function that returns array of reviews for single film.
-=======
-// Returns array of reviews for single film. Useful for testing. 
->>>>>>> multiReviews
 function getReviews(searchTerm) {
   return retrieve.getSearchResult(searchTerm)
   .then(function(searchResult){ return retrieve.getReviewLink(searchResult)})
