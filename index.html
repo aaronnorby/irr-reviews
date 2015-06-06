@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>IRR Reviews</title>
+  <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script
+    src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="user-input.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+
+  <style>
+    html, body {
+      height: 100%;
+      background: white;       }
+    .header {
+      width: 100%;
+      height: 40px;
+      background-color: blue;
+      margin-bottom: 5px;
+    }
+
+    .input-container {
+      background: white;
+      width: 100%;
+      margin: auto;
+      padding-top: 20px;
+    }
+    user-input {
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 75%;
+    }
+    @media all and (max-width: 600px) {
+      user-input {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    paper-toolbar {
+      background-color: #af53b5;
+    }
+    a {
+      color: white;
+      margin: auto;
+    }
+        
+  </style>
+
+</head>
+
+<body unresolved>
+
+  <paper-toolbar class="medium-tall">
+    <div title>IRR-Reviews</div>
+    <a href="nowhere" class="bottom">Link to nowhere</a>
+    <span class="bottom">SOme text.</span>
+  </paper-toolbar>
+  
+
+  <div class="input-container">
+    <user-input></user-input>
+  </div>
+
+
+
+</body>

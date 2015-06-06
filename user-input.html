@@ -1,0 +1,170 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="agreement-display.html">
+
+<dom-module id="user-input">
+  <style>
+    :host {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+    form {
+      color: #2aa198;
+      padding: 15px;
+    }
+    label, input {
+      padding: 5px;
+      margin: 5px;
+      
+    }
+    .container {
+      
+      display: flex;
+      flex-direction: column;
+      /*border-style: solid;*/
+      border-width: 2px;
+      border-radius: 10px;
+      width: 30%;
+      background-color: #ff5A3f;
+      margin: 15px;
+
+      -webkit-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+      -moz-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+      box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+    }
+    agreement-display {
+      position: relative;
+      /*margin: auto;*/
+      padding: 30px;
+    }
+    .agreement-container, .scores-display {
+      order: 2;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      width: 30%;
+      /*border-style: solid;*/
+      border-width: 2px;
+      border-radius: 10px;
+      background-color: #ff5f5f;
+      margin: 15px;
+
+      -webkit-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+      -moz-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+      box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.6);
+    }
+    .scores-display {
+      background-color: #ff7fbf;
+      display: flex;
+      flex-direction: column;
+      
+    }
+    .scores-display p {
+      margin-left: 5px;
+    }
+    @media all and (max-width: 600px) {
+      .agreement-container {
+        order: 2;
+        width: 100%;
+      }
+      .container {
+        order: 1;
+        width: 100%;
+      }
+      .scores-display {
+        order:3; 
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+  <div class="agreement-container">
+    <agreement-display></agreement-display>
+  </div> 
+
+  <div class="container">
+    <form is="iron-form" id="form">
+      <input name="title" type="text"><br>
+      <input name="score" type="text"><br> <!--modify this field to only accept 1-5-->    
+      <button on-click="logReview">Log review</button>
+    </form>
+    <template is="dom-repeat" items="{{reviews}}">
+      <p>Title: <span>{{item.title}}</span></p>
+      <p>Score: <span>{{item.score}}</span></p>
+    </template>  
+  </div>
+
+  <div class="scores-display">
+    <p>Scores:</p>
+    <p>{{dumb}}</p>
+  </div>
+  
+
+  <iron-ajax id="ajax"
+    url="/"
+    method="POST"
+    handle-as="text"
+    on-response="dummyHandleIt"
+    body = ""
+    ></iron-ajax>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "user-input",
+
+    listeners: {
+      'calculate-tap': 'dummy'
+    },
+
+    dummy: function(e) {
+      var data = this.$.form.serialize();
+      this.$.ajax.body = JSON.stringify(this.reviews);
+      this.$.ajax.generateRequest();
+    },
+
+    dummyHandleIt: function() {
+      var res = this.$.ajax.lastResponse;
+      this.dumb = "Count: " + res;  
+    },
+
+    
+    calculateScores: function(e) {
+      e.preventDefault();
+      var data = this.$.form.serialize();
+      this.$.ajax.body = JSON.stringify(data);
+      this.$.ajax.generateRequest();
+      this.$.form.reset();
+    },
+    
+    logReview: function() {
+      this.push('reviews', this.$.form.serialize());
+      this.$.form.reset();
+    },
+   
+
+    ready: function() {
+      this.reviews = [];
+      this.dumb = "";
+    },
+
+        
+    handleIt: function() {
+      var review = this.$.ajax.lastResponse;
+      //console.log(review);
+      //this.reviews += " world";
+
+      this.push('reviews', this.$.ajax.lastResponse);
+
+      // console.log(this.reviews);
+
+      
+      //return this.reviews.push(this.$.ajax.lastResponse);
+    }
+          
+  });
+</script>
