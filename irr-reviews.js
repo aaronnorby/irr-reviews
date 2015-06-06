@@ -129,20 +129,37 @@ function getReviews(searchTerm) {
   });
 }
 
-// Calls CKJS and gets scores for all reviewers, prints them out. 
+// Calls CKJS and gets scores for all reviewers. Then, creates a new objects for
+// each reviewer and score, pushes them onto an array, filters out the ones that
+// return too-few-reviews errors (any that aren't numbers for kappa), sorts them in
+// descending order, and returns the top 5. 
 function compare(userReviews, reviewerObject) {
   var results = [];
   for (reviewer in reviewerObject) {
     if (reviewerObject.hasOwnProperty(reviewer)) {
       var reviews = reviewerObject[reviewer];
       var k = Cohen.kappa(user, reviews, 5, 'linear');
-      console.log(reviewer + " agreement:" + k);
-      
+      var numReviews = Object.keys(reviews).length;
+
+      console.log(reviewer + ": " + JSON.stringify(reviews));
+
+      var agreement = {'reviewer': reviewer, 'kappa': k, 'numReviews': numReviews};
+      results.push(agreement);
     }
   };
+  var returnVal = results.filter(function(rev) {
+    return typeof rev['kappa'] === 'number';
+      }).sort(function(a,b) {
+        return b['kappa'] - a['kappa'];
+      });
+  //console.log(returnVal.slice(0,5));
+  return returnVal.slice(0,5); // returns the top five agreements;
 }
  
 
+
+
+  
 
 
 
