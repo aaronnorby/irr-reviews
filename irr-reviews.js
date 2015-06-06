@@ -141,7 +141,7 @@ function compare(userReviews, reviewerObject) {
       var k = Cohen.kappa(user, reviews, 5, 'linear');
       var numReviews = Object.keys(reviews).length;
 
-      console.log(reviewer + ": " + JSON.stringify(reviews));
+      //console.log(reviewer + ": " + JSON.stringify(reviews));
 
       var agreement = {'reviewer': reviewer, 'kappa': k, 'numReviews': numReviews};
       results.push(agreement);
