@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "iron-elements": "PolymerElements/iron-elements#~1.0.0",
     "iron-form": "PolymerElements/iron-form#~1.0.0",
     "iron-ajax": "PolymerElements/iron-ajax#~1.0.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0"
