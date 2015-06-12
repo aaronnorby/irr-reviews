@@ -42,8 +42,9 @@
     .agreement-container, .scores-display {
       order: 2;
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: flex-start;
+      align-items: center;
       width: 30%;
       /*border-style: solid;*/
       border-width: 2px;
@@ -81,7 +82,8 @@
   </style>
   <template>
   <div class="agreement-container">
-    <agreement-display></agreement-display>
+    <agreement-display></agreement-display><br>
+    <p id="pending"></p>
   </div> 
 
   <div class="container">
@@ -98,11 +100,11 @@
   </div>
 
   <div class="scores-display">
-    <p>Scores:</p>
+    <p><h3>Scores:</h3></p>
     <template is="dom-repeat" items="{{agreements}}">
-      <p>Reviewer: <span>{{item.reviewer}}</span></p>
-      <p>Kappa: <span>{{item.kappa}}</span></p>
-      <p>Num Reviews: <span>{{item.numReviews}}</p>
+      Reviewer: <span>{{item.reviewer}}</span>
+      Kappa: <span>{{item.kappa}}</span>
+      Num Reviews: <span>{{item.numReviews}}
     </template>
       <!--<p>{{agreements}}</p>-->
   </div>
@@ -131,6 +133,7 @@
       e.preventDefault();
       this.$.ajax.body = JSON.stringify(this.test);
       this.$.ajax.generateRequest();
+      this.$.pending.textContent = "Retrieving scores...";
     },
 
     dummy: function(e) {
@@ -155,7 +158,9 @@
 
     showAgreement: function(e) {
       var res = this.$.ajax.lastResponse;
-      this.agreements = JSON.stringify(res);
+      console.dir(res);
+      this.agreements = res;
+      this.$.pending.textContent = "";
     },
     
     logReview: function() {

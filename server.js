@@ -27,7 +27,6 @@ function userfyData(ratings) {
   for (var i=0; i<len; i++) {
     user[ratings[i]['title']] = Number(ratings[i]['score']);
   }
-  //console.log(user);
   return user;
 }
 
@@ -46,9 +45,8 @@ function returnAgreement(req, res) {
   });
   req.on("end", function() {
     var user = userfyData(JSON.parse(data));
-    //console.log(user);
     var resData = JSON.stringify(user);
-    //respond(req, res, 200, "application/json", resData);
+
     respondIrr(req, res, user);
   });
   req.on("error", function(err) {
@@ -56,16 +54,20 @@ function returnAgreement(req, res) {
   });
 }
 
+// irr() returns a promise. When that promise fulfills, it will be an array of
+// objects with the properties 'reviewer', 'kappa', and 'numReviews', whose values
+// are the respective reviewer, the kappa statistic, and the number of reviews used
+// in calculating k. 
 function respondIrr(req, res, userRevs) {
   irr(userRevs).then(function(comparisons) {
-    console.log("In respondIrr: " + comparisons);
     respond(req, res, 200, "application/json", JSON.stringify(comparisons));
   },
   function(err) {
-    console.log("in respondIrr: " + err);
+    console.log("Error in respondIrr: " + err);
     respond(req, res, 500, null, err);
   }).catch(function(error) {
-    console.log("In respondIrr, in catch: " + error);
+    console.log("Error in respondIrr, in catch: " + error);
+    respond(req, res, 500, null, error);
   });
 }
 

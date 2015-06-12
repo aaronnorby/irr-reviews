@@ -31,7 +31,8 @@ module.exports = function(user) {
   // this defer will resolve/reject way at the bottom of this outer function,
   // inside of showResults.
 
-
+  // Sets up a promise for the exported function to return. The promise gets
+  // resolved inside of showResults(), the last inner function executed. 
   var def = Q.defer();
   var profReviews = {};
   
@@ -63,22 +64,7 @@ module.exports = function(user) {
   //it to the stack.
   var showResults = function() {
     var comparisons = compare(user, profReviews);
-    console.log("in showResults: " + JSON.stringify(comparisons));
     def.resolve(comparisons);
-    /*
-    if (comparisons) {
-      def.resolve(comparisons);
-    }else {
-      def.reject();
-    }
-    return def.promise;
-    */
-    /*
-    try{
-      console.log(compare(user, profReviews));
-    }catch(e) {
-      console.log("in irr, showResults: " + e);
-    } */
   }
   
   searches.push(showResults);
@@ -91,6 +77,7 @@ module.exports = function(user) {
     result = result.then(f);
   });
   
+  // This is the promise created at the beginning of the exported function. 
   return def.promise;
   
   // Calls CKJS and gets scores for all reviewers. Then, creates a new objects for
