@@ -90,6 +90,7 @@
       <input name="score" type="text"><br> <!--modify this field to only accept 1-5-->    
       <button on-click="logReview">Log review</button>
     </form>
+    <button on-click="testReq">Test Req</button>
     <template is="dom-repeat" items="{{reviews}}">
       <p>Title: <span>{{item.title}}</span></p>
       <p>Score: <span>{{item.score}}</span></p>
@@ -98,15 +99,20 @@
 
   <div class="scores-display">
     <p>Scores:</p>
-    <p>{{dumb}}</p>
+    <template is="dom-repeat" items="{{agreements}}">
+      <p>Reviewer: <span>{{item.reviewer}}</span></p>
+      <p>Kappa: <span>{{item.kappa}}</span></p>
+      <p>Num Reviews: <span>{{item.numReviews}}</p>
+    </template>
+      <!--<p>{{agreements}}</p>-->
   </div>
   
 
   <iron-ajax id="ajax"
     url="/"
     method="POST"
-    handle-as="text"
-    on-response="dummyHandleIt"
+    handle-as="json"
+    on-response="showAgreement"
     body = ""
     ></iron-ajax>
 
@@ -119,6 +125,12 @@
 
     listeners: {
       'calculate-tap': 'dummy'
+    },
+
+    testReq: function(e) {
+      e.preventDefault();
+      this.$.ajax.body = JSON.stringify(this.test);
+      this.$.ajax.generateRequest();
     },
 
     dummy: function(e) {
@@ -140,15 +152,38 @@
       this.$.ajax.generateRequest();
       this.$.form.reset();
     },
+
+    showAgreement: function(e) {
+      var res = this.$.ajax.lastResponse;
+      this.agreements = JSON.stringify(res);
+    },
     
     logReview: function() {
       this.push('reviews', this.$.form.serialize());
+      console.dir(this.reviews);
       this.$.form.reset();
     },
    
 
     ready: function() {
       this.reviews = [];
+      this.agreements = [];
+      this.test = [{title: 'The Terminator', score: '5'}, 
+                   {title: 'Predator', score: '4'},
+                   {title: 'Point Break', score: '3'},
+                   {title: 'Speed', score: '3'}, 
+                   {title: 'Aliens', score: '5'},
+                   {title: 'The Breakfast Club', score: '5'},
+                   {title: 'Inherent Vice', score: '4'},
+                   {title: 'Red Dawn', score: '2'},
+                   {title: 'The Big Lebowski', score: '5'},
+                   {title: 'Videodrome', score: '4'},
+                   {title: 'John Wick', score: '2'},
+                   {title: 'Zero Dark Thirty', score: '1'},
+                   {title: 'All is Lost', score: '5'},
+                   {title: 'Inside Llewyn Davis', score: '4'},
+                   {title: 'Silver Linings Playbook', score: '3'}];
+
       this.dumb = "";
     },
 
