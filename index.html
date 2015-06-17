@@ -10,11 +10,14 @@
     src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="user-input.html">
   <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
 
   <style>
     html, body {
       height: 100%;
-      background: white;       }
+      background: white;   
+      font-family: 'Droid Serif', 'Lucida Grande';
+    }
     .header {
       width: 100%;
       height: 40px;
@@ -48,9 +51,15 @@
     }
     a {
       color: white;
-      margin: auto;
     }
-        
+    #bottomBar.paper-toolbar {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    #bottomBar.paper-toolbar p {
+      align-self: flex-start;
+      font-family: 'Droid Serif', 'Lucida Grande';
+    }
   </style>
 
 </head>
@@ -58,9 +67,9 @@
 <body unresolved>
 
   <paper-toolbar class="medium-tall">
-    <div title>IRR-Reviews</div>
-    <a href="nowhere" class="bottom">Link to nowhere</a>
-    <span class="bottom">SOme text.</span>
+    <div class="title">IRR-Reviews</div>
+    <a href="nowhere">Aaron on GitHub</a>
+    <p class="bottom">Because you need to know who agrees with you.</p>
   </paper-toolbar>
   
 

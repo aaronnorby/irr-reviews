@@ -39,12 +39,14 @@
       /*margin: auto;*/
       padding: 30px;
     }
+    .agreement-container {
+      align-items: center;
+    }
     .agreement-container, .scores-display {
       order: 2;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      align-items: center;
       width: 30%;
       /*border-style: solid;*/
       border-width: 2px;
@@ -60,10 +62,13 @@
       background-color: #ff7fbf;
       display: flex;
       flex-direction: column;
-      
+      align-items: flex-start;
     }
-    .scores-display p {
-      margin-left: 5px;
+    .scores-display h3 {
+      align-self: center;
+    }
+    .scores-wrapper ::content {
+      padding-left: 15px;
     }
     @media all and (max-width: 600px) {
       .agreement-container {
@@ -100,11 +105,13 @@
   </div>
 
   <div class="scores-display">
-    <p><h3>Scores:</h3></p>
+    <h3>Scores:</h3>
     <template is="dom-repeat" items="{{agreements}}">
-      Reviewer: <span>{{item.reviewer}}</span>
-      Kappa: <span>{{item.kappa}}</span>
-      Num Reviews: <span>{{item.numReviews}}
+      <div class="scores-wrapper">
+        <p>Reviewer: <span>{{item.reviewer}}</span></p>
+        <p>Kappa: <span>{{item.kappa}}</span></p>
+        <p>Num Reviews: <span>{{item.numReviews}}</span></p>
+      </div>
     </template>
       <!--<p>{{agreements}}</p>-->
   </div>
