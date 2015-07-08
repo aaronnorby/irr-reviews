@@ -1,0 +1,23 @@
+{
+  "name": "irr-reviews",
+  "version": "0.1.0",
+  "description": "find reviewers who share your taste in movies",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaronnorby/irr-reviews.git"
+  },
+  "dependencies": {
+    "ecstatic": "0.x.x",
+    "q": "1.x.x"
+  },
+  "author": "Aaron Norby <aaron.norby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aaronnorby/irr-reviews/issues"
+  },
+  "homepage": "https://github.com/aaronnorby/irr-reviews#readme"
+}

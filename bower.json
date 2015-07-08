@@ -1,0 +1,23 @@
+{
+  "name": "irr-reviews",
+  "version": "0.1.0",
+  "authors": [
+    "Aaron Norby <aaron.norby@gmail.com>"
+  ],
+  "description": “find reviewers who share your taste in movies“,
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-form": "PolymerElements/iron-form#~1.0.0",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.0.0",
+    "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0"
+  }
+}

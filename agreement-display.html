@@ -1,0 +1,40 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="rating-display">
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+    button {
+      /*margin: 20%;*/
+    }
+
+    .container {
+ 
+    }
+        
+
+  </style>
+
+  <template>
+    <div class="container">
+      <button on-click="calculateClick">Calculate scores</button><br>
+      <content></content>
+    </div>
+            
+  </template>
+
+  <script>
+    Polymer({
+      is: "agreement-display",
+
+      calculateClick: function() {
+        this.fire('calculate-tap');
+      }
+    });
+  </script>
+
+</dom-module>
+

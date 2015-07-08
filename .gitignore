@@ -2,3 +2,4 @@
 *.txt
 weighted_kappa.R
 bower_components/
+node_modules/

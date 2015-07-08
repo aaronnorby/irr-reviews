@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>IRR Reviews</title>
+  <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script
+    src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="user-input.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+
+  <style>
+    html, body {
+      height: 100%;
+      background: white;   
+      font-family: 'Droid Serif', 'Lucida Grande';
+    }
+    .header {
+      width: 100%;
+      height: 40px;
+      background-color: blue;
+      margin-bottom: 5px;
+    }
+
+    .input-container {
+      background: white;
+      width: 100%;
+      margin: auto;
+      padding-top: 20px;
+    }
+    user-input {
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      width: 75%;
+    }
+    @media all and (max-width: 600px) {
+      user-input {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    paper-toolbar {
+      background-color: #af53b5;
+    }
+    a {
+      color: white;
+    }
+    #bottomBar.paper-toolbar {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    #bottomBar.paper-toolbar p {
+      align-self: flex-start;
+      font-family: 'Droid Serif', 'Lucida Grande';
+    }
+  </style>
+
+</head>
+
+<body unresolved>
+
+  <paper-toolbar class="medium-tall">
+    <div class="title">IRR-Reviews</div>
+    <a href="nowhere">Aaron on GitHub</a>
+    <p class="bottom">Because you need to know who agrees with you.</p>
+  </paper-toolbar>
+  
+
+  <div class="input-container">
+    <user-input></user-input>
+  </div>
+
+
+
+</body>
