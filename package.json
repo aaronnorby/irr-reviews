@@ -8,10 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aaronnorby/irr-reviews.git"
+    "url": "https://github.com/aaronnorby/irr-reviews.git"
   },
   "dependencies": {
-    "ecstatic": "0.x.x"
+    "ecstatic": "0.x.x",
+    "q": "1.x.x"
   },
   "author": "Aaron Norby <aaron.norby@gmail.com>",
   "license": "MIT",
