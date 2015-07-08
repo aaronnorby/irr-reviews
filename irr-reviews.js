@@ -49,8 +49,8 @@ module.exports = function(user) {
   titles.forEach(function(title) {
     var search = function() {
       return retrieve.getSearchResult(title)
-      .then(function(searchResult){ return retrieve.getReviewLink(searchResult)})
-      .then(function(reviewLink){ return retrieve.reviewsFromReviewLink(reviewLink)})
+      .then(function(searchResult){ return retrieve.getReviewLink(searchResult);})
+      .then(function(reviewLink){ return retrieve.reviewsFromReviewLink(reviewLink);})
       .then(function(reviewArray) {
         retrieve.parseReviewArray(title, reviewArray, profReviews, true);
       }).catch(function(error) {
@@ -100,9 +100,9 @@ module.exports = function(user) {
     }
     //console.log("In irr, in compare: " + results);
     var returnVal = results.filter(function(rev) {
-      return typeof rev['kappa'] === 'number';
+      return typeof rev.kappa === 'number';
         }).sort(function(a,b) {
-          return b['kappa'] - a['kappa'];
+          return b.kappa - a.kappa;
         });
     //console.log(returnVal.slice(0,5));
     return returnVal.slice(0,5); // returns the top five agreements;
