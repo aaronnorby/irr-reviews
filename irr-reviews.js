@@ -65,7 +65,7 @@ module.exports = function(user) {
   var showResults = function() {
     var comparisons = compare(user, profReviews);
     def.resolve(comparisons);
-  }
+  };
   
   searches.push(showResults);
   
@@ -86,7 +86,7 @@ module.exports = function(user) {
   // descending order, and returns the top 5. 
   function compare(userReviews, reviewerObject) {
     var results = [];
-    for (reviewer in reviewerObject) {
+    for (var reviewer in reviewerObject) {
       if (reviewerObject.hasOwnProperty(reviewer)) {
         var reviews = reviewerObject[reviewer];
         var k = Cohen.kappa(user, reviews, 5, 'linear');
@@ -97,7 +97,7 @@ module.exports = function(user) {
         var agreement = {'reviewer': reviewer, 'kappa': k, 'numReviews': numReviews};
         results.push(agreement);
       }
-    };
+    }
     //console.log("In irr, in compare: " + results);
     var returnVal = results.filter(function(rev) {
       return typeof rev['kappa'] === 'number';
@@ -108,13 +108,13 @@ module.exports = function(user) {
     return returnVal.slice(0,5); // returns the top five agreements;
   }
 
-}
+};
 
 // Utility function that returns array of reviews for single film.
 function getReviews(searchTerm) {
   return retrieve.getSearchResult(searchTerm)
-  .then(function(searchResult){ return retrieve.getReviewLink(searchResult)})
-  .then(function(reviewLink){ return retrieve.reviewsFromReviewLink(reviewLink)})
+  .then(function(searchResult){ return retrieve.getReviewLink(searchResult);})
+  .then(function(reviewLink){ return retrieve.reviewsFromReviewLink(reviewLink);})
   .then(function(reviewArray){
     console.log(reviewArray);
   }, function(error){
