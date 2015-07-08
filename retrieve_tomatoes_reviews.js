@@ -4,9 +4,9 @@ var http = require("http");
 var Q = require("q");
 
 function RetrieveTomato() {
-};
+}
 
-var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies.json" 
+var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies.json";
 var apikey = "my-API-key";
 
 /*
@@ -85,18 +85,18 @@ RetrieveTomato.prototype.reviewsFromReviewLink = function(reviewLink) {
   });
 
   return def.promise;
-}
+};
 
 // Takes preexisting reviewerList object and the reivewArray for a given movie, and
 // then adds reviews to the reviewerList, creating a new subobject for any critics
 // not already in there. Assumes externally held reviewerList. 
 RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewerList, freshnessToScore) {
-  var freshnessToScore = freshnessToScore || false;
+  freshnessToScore = freshnessToScore || false;
   for (var rev = 0; rev < reviewArray.length; rev++) {
     var reviewObject = reviewArray[rev];
     var critic = reviewObject.critic;
 
-    if (critic == "") continue;  // Could also use publication as critic name. 
+    if (critic === "") continue;  // Could also use publication as critic name. 
 
     if (reviewObject["original_score"] !== undefined) {
       var score = normalizeScore(reviewObject.original_score);
@@ -111,7 +111,8 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       reviewerList[critic][movie] = score;
     } 
     
-  };
+  }
+  
   return reviewerList; 
 
   // Convert freshness to numerical score.
@@ -123,7 +124,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       score = "1/2";
     } 
     return score;
-  }; 
+  }
 
   // Normalize scores to 1-5 scale. 
   function normalizeScore(score) {
@@ -137,7 +138,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       // normalizeScore is leaving some scores with "/" in them, which returns NaN
       // with kappa.
 
-      if (dividend == 0) {
+      if (dividend === 0) {
         dividend += 1;
         divisor += 1;
       }
@@ -163,9 +164,9 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
     } catch(e) {
       console.log("Normalize error:" + e);
     } 
-  };
+  }
     
-}
+};
 
 RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
   var deferred = Q.defer();
@@ -196,7 +197,7 @@ RetrieveTomato.prototype.getSearchResult = function(searchTerm) {
 
   return deferred.promise;
 
-}
+};
 
 
 
