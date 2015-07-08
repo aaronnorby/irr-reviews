@@ -4,7 +4,7 @@
   "authors": [
     "Aaron Norby <aaron.norby@gmail.com>"
   ],
-  "description": "cohens movie reviews with polymer",
+  "description": “find reviewers who share your taste in movies“,
   "main": "index.html",
   "license": "MIT",
   "ignore": [
