@@ -95,13 +95,14 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
   for (var rev = 0; rev < reviewArray.length; rev++) {
     var reviewObject = reviewArray[rev];
     var critic = reviewObject.critic;
+    var score;
 
     if (critic === "") continue;  // Could also use publication as critic name. 
 
     if (reviewObject["original_score"] !== undefined) {
-      var score = normalizeScore(reviewObject.original_score);
+      score = normalizeScore(reviewObject.original_score);
     } else if (freshnessToScore && reviewObject["freshness"] !== undefined) {
-      var score = normalizeScore(freshscore(reviewObject.freshness));
+      score = normalizeScore(freshscore(reviewObject.freshness));
     }
 
     if (reviewerList[critic] !== undefined) {
@@ -133,6 +134,7 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
       var scoreParts = score.split("/");
       var dividend = parseFloat(scoreParts[0], 10);
       var divisor = parseFloat(scoreParts[1], 10);
+      var newScore;
 
       // TODO: add check that neither is NaN after parseFloat(); Also,
       // normalizeScore is leaving some scores with "/" in them, which returns NaN
@@ -153,11 +155,11 @@ RetrieveTomato.prototype.parseReviewArray = function(movie, reviewArray, reviewe
         // Assign to a 5-star bin randomly from the bins the score could be in.
         // Assumes, eg, a 2/2 could be anywhere in upper half of /5 scale. 
         var r = Math.random();
-        var newScore = Math.ceil((r*breaks) + lowerBound); 
+        newScore = Math.ceil((r*breaks) + lowerBound); 
         return newScore;
 
       } else if (dividend > 5) {
-        var newScore = Math.ceil((5 / divisor) * dividend);
+        newScore = Math.ceil((5 / divisor) * dividend);
         return newScore;
       }
 
