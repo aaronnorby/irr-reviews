@@ -103,8 +103,8 @@
 
   <div class="container">
     <form is="iron-form" id="form">
-      <input name="title" type="text"><br>
-      <input is="iron-input" prevent-invalid-input allowed-pattern="[1-5]" name="score" type="text"><br>    
+      <input name="title" type="text" placeholder="Title"><br>
+      <input is="iron-input" placeholder="Rating: 1-5" prevent-invalid-input allowed-pattern="[1-5]" name="score" type="text"><br>    
       <button on-click="logReview">Log review</button>
     </form>
     <button class="test" on-click="testReq">Test Req</button>
