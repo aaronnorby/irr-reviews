@@ -71,6 +71,15 @@
     .scores-wrapper ::content {
       padding-left: 15px;
     }
+    .test {
+      width: 50%;
+      align-self: center;
+      margin-bottom: 2%;
+    }
+    .log {
+      margin: 5%;
+      border-top: 1px solid black;
+    }
     @media all and (max-width: 600px) {
       .agreement-container {
         order: 2;
@@ -98,10 +107,12 @@
       <input is="iron-input" prevent-invalid-input allowed-pattern="[1-5]" name="score" type="text"><br>    
       <button on-click="logReview">Log review</button>
     </form>
-    <button on-click="testReq">Test Req</button>
+    <button class="test" on-click="testReq">Test Req</button>
     <template is="dom-repeat" items="{{reviews}}">
-      <p>Title: <span>{{item.title}}</span></p>
-      <p>Score: <span>{{item.score}}</span></p>
+      <div class="log">
+        <p>Title: <span>{{item.title}}</span></p>
+        <p>Score: <span>{{item.score}}</span></p>
+      </div>
     </template>  
   </div>
 
