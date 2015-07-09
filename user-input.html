@@ -134,7 +134,7 @@
     is: "user-input",
 
     listeners: {
-      'calculate-tap': 'dummy'
+      'calculate-tap': 'getAgreement'
     },
 
     testReq: function(e) {
@@ -144,24 +144,11 @@
       this.$.pending.textContent = "Retrieving scores...";
     },
 
-    dummy: function(e) {
-      var data = this.$.form.serialize();
+    getAgreement: function(e) {
+      e.preventDefault();
       this.$.ajax.body = JSON.stringify(this.reviews);
       this.$.ajax.generateRequest();
-    },
-
-    dummyHandleIt: function() {
-      var res = this.$.ajax.lastResponse;
-      this.dumb = "Count: " + res;  
-    },
-
-    
-    calculateScores: function(e) {
-      e.preventDefault();
-      var data = this.$.form.serialize();
-      this.$.ajax.body = JSON.stringify(data);
-      this.$.ajax.generateRequest();
-      this.$.form.reset();
+      this.$.pending.textContent = "Retrieving scores...";
     },
 
     showAgreement: function(e) {
@@ -197,22 +184,7 @@
                    {title: 'Inside Llewyn Davis', score: '4'},
                    {title: 'Silver Linings Playbook', score: '3'}];
 
-      this.dumb = "";
-    },
-
-        
-    handleIt: function() {
-      var review = this.$.ajax.lastResponse;
-      //console.log(review);
-      //this.reviews += " world";
-
-      this.push('reviews', this.$.ajax.lastResponse);
-
-      // console.log(this.reviews);
-
-      
-      //return this.reviews.push(this.$.ajax.lastResponse);
     }
-          
+              
   });
 </script>
